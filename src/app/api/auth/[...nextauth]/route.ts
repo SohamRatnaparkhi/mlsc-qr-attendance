@@ -5,7 +5,7 @@ import axios from 'axios';
 import NextAuth, { type NextAuthOptions } from 'next-auth';
 import GitHubProvider from 'next-auth/providers/github';
 
-export const authOptions: NextAuthOptions = {
+const authOptions: NextAuthOptions = {
     session: {
         strategy: 'jwt'
     },
