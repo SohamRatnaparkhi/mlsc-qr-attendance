@@ -17,6 +17,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 export function CardWithForm({
@@ -25,18 +26,19 @@ export function CardWithForm({
     options: { label: string; value: string }[]
 }) {
     const [selected, setSelected] = React.useState(options[0].value)
+    const router = useRouter()
     return (
         <Card className="w-[350px]">
             <CardHeader>
-                <CardTitle>Create project</CardTitle>
-                <CardDescription>Deploy your new project in one-click.</CardDescription>
+                <CardTitle>MLSC Event Manager</CardTitle>
+                <CardDescription>Learn | Build | Empower</CardDescription>
             </CardHeader>
             <CardContent>
                 <form>
                     <div className="grid w-full items-center gap-4">
                         <div className="flex flex-col space-y-1.5">
                             <Label htmlFor="framework">Select Event</Label>
-                            <Select>
+                            <Select onValueChange={(value) => setSelected(value)}>
                                 <SelectTrigger id="framework">
                                     <SelectValue placeholder="Select" />
                                 </SelectTrigger>
@@ -44,13 +46,8 @@ export function CardWithForm({
                                     {
                                         options.map((option) => (
                                             <div key={option.value} >
-                                                <SelectItem value={option.value} >
-                                                    <div onClick={() => {
-                                                        setSelected(option.value)
-                                                        console.log(option.value)
-                                                    }}>
+                                                <SelectItem value={option.value} >                                                    
                                                         {option.label}
-                                                    </div>
                                                 </SelectItem>
                                             </div>
                                         ))
@@ -64,14 +61,13 @@ export function CardWithForm({
             <CardFooter className="flex justify-between">
                 <Button variant="outline">Cancel</Button>
                 <div>
-
                     <Button
                         onClick={
                             () => {
-                                console.log(selected)
+                                router.push(`/events/${selected}`)
                             }
                         }
-                    >Attend</Button>
+                    >Proceed</Button>
                 </div>
             </CardFooter>
         </Card>
